@@ -1,0 +1,8 @@
+{
+  "name": "audit-report-monorepo",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "postinstall": "echo 'Run npm install in each package'"
+  }
+}

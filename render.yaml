@@ -1,0 +1,44 @@
+services:
+  - type: web
+    name: audit-api
+    env: node
+    rootDir: packages/api
+    plan: free
+    autoDeploy: true
+    buildCommand: npm install
+    startCommand: node src/index.js
+    envVars:
+      - key: PORT
+        value: 4000
+      - key: CORS_ORIGIN
+        value: https://your-frontend.example.com
+      - key: MONGO_URI
+        fromSecret: MONGO_URI
+      - key: REDIS_URL
+        fromSecret: REDIS_URL
+      - key: OPEN_PAGERANK_API_KEY
+        fromSecret: OPEN_PAGERANK_API_KEY
+      - key: SERPAPI_KEY
+        fromSecret: SERPAPI_KEY
+      - key: PAGESPEED_API_KEY
+        fromSecret: PAGESPEED_API_KEY
+
+  - type: worker
+    name: audit-worker
+    env: node
+    rootDir: packages/worker
+    plan: free
+    autoDeploy: true
+    buildCommand: npm install
+    startCommand: node src/index.js
+    envVars:
+      - key: MONGO_URI
+        fromSecret: MONGO_URI
+      - key: REDIS_URL
+        fromSecret: REDIS_URL
+      - key: OPEN_PAGERANK_API_KEY
+        fromSecret: OPEN_PAGERANK_API_KEY
+      - key: SERPAPI_KEY
+        fromSecret: SERPAPI_KEY
+      - key: PAGESPEED_API_KEY
+        fromSecret: PAGESPEED_API_KEY
